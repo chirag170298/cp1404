@@ -7,7 +7,6 @@ MENU = """(G)et a valid score
 
 
 def main():
-
     score = get_score()
     print(MENU)
     choice = input("Your Choice = ").upper()
