@@ -1,3 +1,6 @@
+""" program that stores users' emails (unique keys) and names (values) in a dictionary. """
+
+
 def main():
     emails_to_names = {}
     email = input("Email: ")
@@ -19,6 +22,7 @@ def main():
 
 
 def get_name_from_mail(email):
+    """ extract name from mail."""
     parts = email.split("@")
     full_name = parts[0].split(".")
     name = " ".join([name.title() for name in full_name])
