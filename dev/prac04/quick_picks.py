@@ -1,3 +1,6 @@
+"""
+program that generate a quick pick.
+"""
 import random
 
 MIN_NUM = 1
