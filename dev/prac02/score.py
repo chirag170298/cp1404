@@ -14,6 +14,7 @@ def main():
 
 
 def calculate_result(score):
+    """ return corresponding response to marks"""
     if score < 0 or score > 100:
         return "Invalid score"
     else:

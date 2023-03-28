@@ -1,3 +1,5 @@
+"""Menu Program"""
+
 from score import calculate_result
 
 MENU = """(G)et a valid score
@@ -30,11 +32,13 @@ def main():
 
 
 def display_stars(score):
+    """ print stars equal to scores"""
     for i in range(0, score):
         print('*', end=" ")
 
 
 def get_score():
+    """ get a valid score from user"""
     score = int(input("Enter your score: "))
     while score < 0 or score > 100:
         print("Invalid score. Must between 0 to 100.")
