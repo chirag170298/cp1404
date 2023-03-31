@@ -58,7 +58,7 @@ def main():
         elif choice == 'A':
             pass
         elif choice == 'M':
-
+            pass
         else:
             print("Invalid menu choice")
         print(MENU)
