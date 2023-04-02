@@ -19,11 +19,11 @@ MENU = "Menu: \n" \
 def main():
     print("Travel Tracker 1.0 - by Chirag Verma")
     places = load_data()
-    places.sort(key=lambda place: (place[3], int(place[2])))
     print(f"{len(places)} places loaded from {FILENAME}")
     print(MENU)
     choice = input(">>> ").upper()
     while choice != 'Q':
+        places.sort(key=lambda place: (place[3], int(place[2])))
         unvisited_places = [place for place in places if place[3] == 'n']
         if choice == 'L':
             display_list_of_places(places)
@@ -34,7 +34,8 @@ def main():
                 random_place_generator(unvisited_places)
 
         elif choice == 'A':
-            pass
+            add_new_place(places)
+
         elif choice == 'M':
             if len(unvisited_places) == 0:
                 print("No unvisited places")
@@ -49,6 +50,25 @@ def main():
 
     print(f"{len(places)} saved to {FILENAME}")
     print("Have a nice day :)")
+
+
+def add_new_place(places):
+    name = get_valid_input("Name: ").title()
+    country = get_valid_input("Country: ").title()
+    priority = get_valid_input("Priority: ")
+    while not priority.isdigit():
+        print("Invalid input; enter a valid number")
+        priority = get_valid_input("Priority: ")
+    places.append([name, country, priority, "n"])
+    print(f"{name} in {country} (priority {priority}) added to Travel Tracker")
+
+
+def get_valid_input(prompt):
+    value = input(prompt)
+    while value == "":
+        print("Input cannot be blank")
+        value = input(prompt)
+    return value
 
 
 def mark_place_visited(places):
