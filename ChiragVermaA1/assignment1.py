@@ -32,17 +32,14 @@ def main():
                 print("No places left to visit!")
             else:
                 random_place_generator(unvisited_places)
-
         elif choice == 'A':
             add_new_place(places)
-
         elif choice == 'M':
             if len(unvisited_places) == 0:
                 print("No unvisited places")
             else:
                 display_list_of_places(places)
                 mark_place_visited(places)
-
         else:
             print("Invalid menu choice")
         print(MENU)
@@ -50,6 +47,13 @@ def main():
 
     print(f"{len(places)} saved to {FILENAME}")
     print("Have a nice day :)")
+    save_data(places)
+
+
+def save_data(places):
+    with open("places.csv", "w") as out_file:
+        for place in places:
+            print(",".join(place), file=out_file)
 
 
 def add_new_place(places):
@@ -105,6 +109,7 @@ def load_data():
     for line in in_file:
         text = line[:-1].split(",")
         places.append(text)
+    in_file.close()
     return places
 
 
