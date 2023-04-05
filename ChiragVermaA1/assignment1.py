@@ -60,19 +60,23 @@ def save_data(places):
 def add_new_place(places):
     """Add a new place to a list and by default mark them as unvisited."""
     name = get_valid_input("Name: ").title()
-    while not name.isalpha():  # will get a valid string input from user
-        print("Invalid input; enter a valid text")
-        name = get_valid_input("Name: ").title()
+    name = get_string(name, "Name: ")
     country = get_valid_input("Country: ").title()
-    while not country.isalpha():
-        print("Invalid input; enter a valid text")
-        country = get_valid_input("Country: ").title()
+    country = get_string(country, "Country: ")
     priority = get_valid_input("Priority: ")
     while not priority.isdigit():  # will get a valid int input from user
         print("Invalid input; enter a valid number")
         priority = get_valid_input("Priority: ")
     places.append([name, country, priority, "n"])
     print(f"{name} in {country} (priority {priority}) added to Travel Tracker")
+
+
+def get_string(variable, prompt):
+    """get only string as input from user"""
+    while not variable.isalpha():
+        print("Invalid input; enter a valid text")
+        variable = get_valid_input(prompt).title()
+    return variable
 
 
 def get_valid_input(prompt):
@@ -141,7 +145,8 @@ def display_list_of_places(places):
     if unvisited_count == 0:
         print(f"{len(places)} places. No places left to visit. Why not add a new place?")
     else:
-        print(f"{len(places)} places. You still want to visit {unvisited_count} places")
+        print(f"{len(places)} places. You still want to visit {unvisited_count} " + (
+            "places" if unvisited_count > 1 else "place"))
 
 
 if __name__ == '__main__':
