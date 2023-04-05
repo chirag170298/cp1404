@@ -2,7 +2,7 @@
 Travel Tracker 1.0
 Name: Chirag Verma
 Date started: 31/03/2023
-GitHub URL:
+GitHub URL: https://github.com/chirag170298/cp1404/tree/master/ChiragVermaA1
 """
 
 import random
@@ -21,9 +21,9 @@ def main():
     places = load_data()
     print(f"{len(places)} places loaded from {FILENAME}")
     print(MENU)
-    choice = input(">>> ").upper()
+    choice = get_valid_input(">>> ").upper()
     while choice != 'Q':
-        places.sort(key=lambda place: (place[3], int(place[2])))
+        places.sort(key=lambda place: (place[3], int(place[2])))  # Sort list by visited status then by priority
         unvisited_places = [place for place in places if place[3] == 'n']
         if choice == 'L':
             display_list_of_places(places)
@@ -43,24 +43,32 @@ def main():
         else:
             print("Invalid menu choice")
         print(MENU)
-        choice = input(">>> ").upper()
+        choice = get_valid_input(">>> ").upper()
 
-    print(f"{len(places)} saved to {FILENAME}")
+    print(f"{len(places)} places saved to {FILENAME}")
     print("Have a nice day :)")
     save_data(places)
 
 
 def save_data(places):
+    """Overwrite/save list places in file. """
     with open("places.csv", "w") as out_file:
         for place in places:
             print(",".join(place), file=out_file)
 
 
 def add_new_place(places):
+    """Add a new place to a list and by default mark them as unvisited."""
     name = get_valid_input("Name: ").title()
+    while not name.isalpha():  # will get a valid string input from user
+        print("Invalid input; enter a valid text")
+        name = get_valid_input("Name: ").title()
     country = get_valid_input("Country: ").title()
+    while not country.isalpha():
+        print("Invalid input; enter a valid text")
+        country = get_valid_input("Country: ").title()
     priority = get_valid_input("Priority: ")
-    while not priority.isdigit():
+    while not priority.isdigit():  # will get a valid int input from user
         print("Invalid input; enter a valid number")
         priority = get_valid_input("Priority: ")
     places.append([name, country, priority, "n"])
@@ -68,6 +76,7 @@ def add_new_place(places):
 
 
 def get_valid_input(prompt):
+    """Get some input from a user."""
     value = input(prompt)
     while value == "":
         print("Input cannot be blank")
@@ -76,12 +85,13 @@ def get_valid_input(prompt):
 
 
 def mark_place_visited(places):
+    """Validate user input and mark the user choose place visited if it is unvisited."""
     print("Enter the number of a place to mark as visited")
     mark_number = 0
     is_valid_input = False
     while not is_valid_input:
         try:
-            mark_number = int(input(">>>"))
+            mark_number = int(get_valid_input(">>> "))
             if mark_number <= 0:
                 print("Number must be > 0")
             elif mark_number > len(places):
@@ -98,22 +108,25 @@ def mark_place_visited(places):
 
 
 def random_place_generator(unvisited_places):
+    """Randomly recommend a place from unvisited places."""
     randon_choice = random.choice(unvisited_places)
     print("Not sure where to visit next?")
     print("How about... {} in {}?".format(*randon_choice))
 
 
 def load_data():
+    """Load and split data from FILENAME and store it into list."""
     in_file = open(FILENAME, "r")
     places = []
     for line in in_file:
-        text = line[:-1].split(",")
+        text = line[:-1].split(",")  # [-1] is for leave \n at the end of each line
         places.append(text)
     in_file.close()
     return places
 
 
 def display_list_of_places(places):
+    """Display the list in a proper format and place an asterisk sign in front of unvisited places."""
     max_len_name = max(len(place[0]) for place in places)
     max_len_country = max(len(place[1]) for place in places)
     unvisited_count = 0
