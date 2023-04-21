@@ -1,3 +1,7 @@
+"""Read guitar from a file.
+User can add new guitars.
+print and write them on the same file."""
+
 from dev.prac06.guitar import Guitar
 
 guitars = []

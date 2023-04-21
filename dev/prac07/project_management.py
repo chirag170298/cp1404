@@ -1,3 +1,7 @@
+""" A PROJECT MANAGEMENT SOFTWARE
+Allow users to load, save, display, filter, add, and update projects.
+"""
+
 from project import Project
 from datetime import datetime
 
@@ -13,6 +17,7 @@ FILENAME = 'project.txt'
 
 
 def main():
+    """Display a menu of options and call the appropriate function for the user's choice"""
     projects = load_projects(FILENAME)
     print(MENU)
     choice = input(">>>").lower()
@@ -38,6 +43,7 @@ def main():
 
 
 def load_projects(filename):
+    """Loads project data from a file and returns a list of Project objects."""
     projects = []
     with open(filename, 'r') as in_file:
         in_file.readline()
@@ -52,6 +58,7 @@ def load_projects(filename):
 
 
 def display_projects(projects):
+    """Prints a list of incomplete and completed projects sorted by priority."""
     incomplete_projects = sorted([p for p in projects if p.completion < 100])
     completed_projects = sorted([p for p in projects if p.completion == 100])
 
@@ -65,6 +72,7 @@ def display_projects(projects):
 
 
 def save_projects(projects, filename):
+    """Writes project data to a file in tab-separated format."""
     with open(filename, 'w') as out_file:
         print("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage", file=out_file)
         for project in projects:
@@ -74,6 +82,7 @@ def save_projects(projects, filename):
 
 
 def filter_project_by_date(projects):
+    """Ask the user for a start date and prints a list of projects that start on or after that date"""
     start_date = input("Show projects that start after date(dd/mm/yyyy): ")
     start_date = datetime.strptime(start_date, "%d/%m/%Y").date()
     filtered_projects = sorted([project for project in projects if project.start_date >= start_date])
@@ -83,6 +92,7 @@ def filter_project_by_date(projects):
 
 
 def add_new_project(projects):
+    """Prompts the user for project details and adds a new Project object to the projects list."""
     print("Let's add a new project")
     name = input("Name: ").title()
     start_date = input("Start date (dd/mm/yyyy): ")
@@ -94,6 +104,8 @@ def add_new_project(projects):
 
 
 def update_project(projects):
+    """Prompts the user to choose a project to update, then prompts for new data values and updates it into selected project.
+"""
     for i, project in enumerate(projects):
         print(f"{i}. {project}")
     update_choice = int(input("Project choice: "))
