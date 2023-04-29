@@ -1,17 +1,14 @@
 # CP1404 Assignment 1 - Travel Tracker
 Assignment 1 for CP1404/CP5632, IT@JCU
 
-By: **your name here**  
+By: **Chirag Verma**  
 
-This repo contains starter files including a Python file and two CSV files.  
-(`temp.csv` is to copy from in case you delete the contents of `places.csv` and want the original data back).  
-**Edit this README file**, replacing this paragraph with your own assignment name and details.  
-At the end of the project, complete the very brief project reflection below by answering the questions (replace the `answer...` parts).  
-Note: If you use the free WakaTime service on your own machine, you can track exactly how long you spent in code (over one week).  
-See https://trello.com/c/6H24THnj/21-wakatime-time-tracking-for-ides-join-our-leaderboard
+By doing this assignment I get the knowledge of so many things such as functions, input validation, lists and so on. I learned about the good way of coding and also how a single thing can be done by so many ways.
 
 1. How long did the entire assignment 1 project take you?
-> answer...
+> 3 days
 
 2. What do you plan to do  differently in your development process for assignment 2?
-> answer...
+> - Have patience and try to understand things with clear mind. 
+> - Don't get frustrated if the code not working according to the sample output instead try to correct it with clear mind.
+> - Always break big problems into smaller parts and focus on one part at a time.
