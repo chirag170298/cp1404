@@ -14,12 +14,32 @@ def run_tests():
     assert default_place.priority == 0
     assert not default_place.is_visited
 
-    # Test initial-value place
-    print("Test initial-value place:")
-    new_place = Place("Malagar", "Spain", 1, False)
-    # TODO: Write tests to show this initialisation works
+    # Test initial-value place 1
+    print("Test initial-value place 1:")
+    new_place1 = Place("Malagar", "Spain", 1, False)
 
-    # TODO: Add more tests, as appropriate, for each method
+    # Write tests to show this initialisation works
+    print(new_place1)
+
+    # Test mark_visited function
+    new_place1.mark_visited()
+    print(new_place1)
+
+    # Test initial-value place 2
+    print("Test initial-value place 2:")
+    new_place2 = Place("Mumbai", "India", 5, True)
+
+    # Write tests to show this initialisation works
+    print(new_place2)
+
+    # Test mark_unvisited function
+    new_place2.mark_unvisited()
+    print(new_place2)
+
+    # Test is_important method
+    print("Is place 1 important: ", new_place1.is_important())
+    print("Is place 2 important: ", new_place2.is_important())
+
 
 
 run_tests()
