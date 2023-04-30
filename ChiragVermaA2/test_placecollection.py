@@ -23,15 +23,32 @@ def run_tests():
     place_collection.add_place(Place("Smithfield", "Australia", 5, False))
     print(place_collection)
 
-    # Test sorting places
+    # Test sorting places by priority
     print("Test sorting - priority:")
     place_collection.sort("priority")
     print(place_collection)
-    # TODO: Add more sorting tests
 
-    # TODO: Test saving places (check CSV file manually to see results)
+    # Test sorting places by priority
+    print("Test sorting - country:")
+    place_collection.sort("country")
+    print(place_collection)
 
-    # TODO: Add more tests, as appropriate, for each method
+    # Test sorting places by priority
+    print("Test sorting - name:")
+    place_collection.sort("name")
+    print(place_collection)
+
+    # Test sorting places by priority
+    print("Test sorting - is_visited:")
+    place_collection.sort("is_visited")
+    print(place_collection)
+
+    # Test saving places (check CSV file manually to see results)
+    place_collection.save_places('places.csv')
+
+    # Test number of unvisited places
+    print("No. of unvisited places: ")
+    print(place_collection.number_of_unvisited_places())
 
 
 run_tests()
