@@ -42,3 +42,7 @@ class PlaceCollection:
     def sort(self, key):
         """Sort the lists by key passed to it and then by priority."""
         self.places.sort(key=lambda place: (getattr(place, key), place.priority))
+
+    def __len__(self):
+        """Returns the length of places."""
+        return len(self.places)

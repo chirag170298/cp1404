@@ -16,6 +16,11 @@ class Place:
         return f"{self.name} in {self.country}, priority {self.priority}" + (
             "(visited)" if self.is_visited else "")
 
+    def __repr__(self):
+        """ Returns a string representation of place object."""
+        return f"{self.name} in {self.country}, priority {self.priority}" + (
+            "(visited)" if self.is_visited else "")
+
     def mark_visited(self):
         """Mark the place as visited."""
         self.is_visited = True
