@@ -36,8 +36,9 @@ BoxLayout:
         Label:
             size_hint_y:0.10
             text: 'Place to visit: 2'
-        Label:
-            text: 'list'
+        BoxLayout:
+            id: entries_box
+            orientation: 'vertical'
         Label:
             size_hint_y:0.10
             text: app.bottom_status_text

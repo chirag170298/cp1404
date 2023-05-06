@@ -46,3 +46,6 @@ class PlaceCollection:
     def __len__(self):
         """Returns the length of places."""
         return len(self.places)
+
+    def __iter__(self):
+        return iter(self.places)
