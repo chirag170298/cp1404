@@ -1,4 +1,7 @@
-"""Modified version of assignment 1 so that it uses Place class"""
+"""
+Modified version of assignment 1 so that it uses Place class
+GitHub URL: https://github.com/chirag170298/cp1404/tree/master/ChiragVermaA2
+"""
 
 from place import Place
 
