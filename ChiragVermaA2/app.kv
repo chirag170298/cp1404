@@ -6,8 +6,10 @@ BoxLayout:
         orientation: 'vertical'
         Label:
             text: "Sort by:"
-        Label:
-            text: "1"
+        Spinner:
+            text: app.current_sort_key
+            values: app.sort_keys
+            on_text: app.change_sort_key(self.text)
         Label:
             text: "Add New Place..."
         Label:
