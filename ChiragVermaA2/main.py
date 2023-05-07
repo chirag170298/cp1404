@@ -36,16 +36,15 @@ class TravelTrackerApp(App):
         self.title = "TravelTracker"
         self.root = Builder.load_file(KV_FILE)
         self.bottom_status_text = "Welcome to Travel Tracker 2.0"
-        self.top_status_text = f"{self.place_collection.number_of_unvisited_places()}"
         self.sort_keys = SORT_KEY_TO_SORT_VALUE.keys()
-        print(self.sort_keys)
+        # print(self.sort_keys)
         self.current_sort_key = self.sort_keys[0]
+        self.update_top_status_text()
         return self.root
 
     def change_sort_key(self, sort_key):
-        print(self.place_collection)
         self.place_collection.sort(SORT_KEY_TO_SORT_VALUE[sort_key])
-        print(self.place_collection)
+        # print(self.place_collection)
         self.root.ids.entries_box.clear_widgets()
         self.create_buttons()
 
@@ -82,6 +81,7 @@ class TravelTrackerApp(App):
                 self.bottom_status_text = f"You visited {place.name}."
         instance.text = str(place)
         self.change_sort_key(self.current_sort_key)
+        self.update_top_status_text()
 
     def create_place(self):
         name = self.root.ids.name_input.text.strip().title()
@@ -103,12 +103,17 @@ class TravelTrackerApp(App):
         self.create_buttons()
         self.clear_fields()
         self.bottom_status_text = f"{name} in {country}, priority {priority} added."
+        self.update_top_status_text()
 
     def clear_fields(self):
         self.root.ids.name_input.text = ""
         self.root.ids.country_input.text = ""
         self.root.ids.priority_input.text = ""
         self.bottom_status_text = ""
+
+    def update_top_status_text(self):
+        unvisited_count = self.place_collection.number_of_unvisited_places()
+        self.top_status_text = f"Places to visit: {unvisited_count}"
 
     def on_stop(self):
         self.place_collection.save_places(FILENAME)
