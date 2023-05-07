@@ -48,4 +48,5 @@ class PlaceCollection:
         return len(self.places)
 
     def __iter__(self):
+        """Returns an iterator for the places list for class TravelTrackerApp"""
         return iter(self.places)

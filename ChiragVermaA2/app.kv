@@ -17,7 +17,7 @@ BoxLayout:
         TextInput:
             id: name_input
             multiline: False
-            write_tab: False
+            write_tab: False  #move to next field when user click tab
         Label:
             text: "Country:"
         TextInput:
@@ -42,7 +42,7 @@ BoxLayout:
         Label:
             size_hint_y:0.10
             text: app.top_status_text
-        BoxLayout:
+        BoxLayout: # place buttons
             id: entries_box
             orientation: 'vertical'
         Label:
