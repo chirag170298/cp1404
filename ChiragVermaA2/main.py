@@ -23,6 +23,7 @@ class TravelTrackerApp(App):
     """..."""
     current_sort_key = StringProperty()
     sort_keys = ListProperty()
+    top_status_text = StringProperty()
     bottom_status_text = StringProperty()
 
     def __init__(self, **kwargs):
@@ -35,6 +36,7 @@ class TravelTrackerApp(App):
         self.title = "TravelTracker"
         self.root = Builder.load_file(KV_FILE)
         self.bottom_status_text = "Welcome to Travel Tracker 2.0"
+        self.top_status_text = f"{self.place_collection.number_of_unvisited_places()}"
         self.sort_keys = SORT_KEY_TO_SORT_VALUE.keys()
         print(self.sort_keys)
         self.current_sort_key = self.sort_keys[0]
@@ -107,6 +109,10 @@ class TravelTrackerApp(App):
         self.root.ids.country_input.text = ""
         self.root.ids.priority_input.text = ""
         self.bottom_status_text = ""
+
+    def on_stop(self):
+        self.place_collection.save_places(FILENAME)
+        print(f"{len(self.place_collection)} places saved to {FILENAME}")
 
 
 if __name__ == '__main__':
