@@ -11,6 +11,7 @@ from kivy.uix.button import Button
 from kivy.properties import StringProperty
 from kivy.properties import ListProperty
 from placecollection import PlaceCollection
+from place import Place
 
 # constants
 KV_FILE = "app.kv"
@@ -47,20 +48,65 @@ class TravelTrackerApp(App):
         self.create_buttons()
 
     def create_buttons(self):
+        self.root.ids.entries_box.clear_widgets()
         for place in self.place_collection:
             # print(place)
             # Create a button for each place in list
             temp_button = Button(text=str(place))
-            temp_button.bind(on_press=self.press_entry)
+            temp_button.bind(on_release=self.press_entry)
+            temp_button.place = place
+            if place.is_visited:
+                temp_button.background_color = 1, 1, 1, 1  # set background color to white
+            else:
+                temp_button.background_color = 0, 1, 0, 1  # set background color to green for visited places
             self.root.ids.entries_box.add_widget(temp_button)
 
-    def press_entry(self):
-        pass
+    def press_entry(self, instance):
+        place = instance.place
+        instance.text = str(place)
+        if place.is_visited:
+            place.mark_unvisited()
+            instance.background_color = 0, 1, 0, 1  # set background color to green
+            if place.is_important():
+                self.bottom_status_text = f"You need to visit {place.name}.Get Going!"
+            else:
+                self.bottom_status_text = f"You need to visit {place.name}."
+        else:
+            place.mark_visited()
+            instance.background_color = 1, 1, 1, 1  # set background color to white
+            if place.is_important():
+                self.bottom_status_text = f"You visited {place.name}. Great Travelling!"
+            else:
+                self.bottom_status_text = f"You visited {place.name}."
+        instance.text = str(place)
+        self.change_sort_key(self.current_sort_key)
+
+    def create_place(self):
+        name = self.root.ids.name_input.text.strip().title()
+        country = self.root.ids.country_input.text.strip().title()
+        priority = self.root.ids.priority_input.text.strip()
+        if name == "" or country == "" or priority == "":
+            self.bottom_status_text = "All fields must be completed"
+            return
+        try:
+            priority = int(priority)
+        except ValueError:
+            self.bottom_status_text = "Please enter a valid number"
+            return
+        if priority < 1:
+            self.bottom_status_text = "Priority must be > 0"
+            return
+        Place(name, country, priority, False)
+        self.place_collection.add_place(Place(name, country, priority, False))
+        self.create_buttons()
+        self.clear_fields()
+        self.bottom_status_text = f"{name} in {country}, priority {priority} added."
 
     def clear_fields(self):
         self.root.ids.name_input.text = ""
         self.root.ids.country_input.text = ""
         self.root.ids.priority_input.text = ""
+        self.bottom_status_text = ""
 
 
 if __name__ == '__main__':
